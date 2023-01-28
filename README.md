@@ -1,1 +1,0 @@
-# DDL-commands---CREATE-ALTER-DROP

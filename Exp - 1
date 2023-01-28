@@ -1,0 +1,66 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| employee           |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.05 sec)
+
+mysql> use employee;
+Database changed
+mysql> show tables;
+Empty set (0.03 sec)
+
+mysql> CREATE TABLE Details(EMPID int(10), EMPNAME varchar(20), EMPZONE varchar(7), EMPAGE int(2));
+Query OK, 0 rows affected, 2 warnings (0.15 sec)
+
+mysql> DESC Details;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| EMPID   | int         | YES  |     | NULL    |       |
+| EMPNAME | varchar(20) | YES  |     | NULL    |       |
+| EMPZONE | varchar(7)  | YES  |     | NULL    |       |
+| EMPAGE  | int         | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+
+mysql> select 8 from Details;
+Empty set (0.03 sec)
+
+mysql> select * from Details;
+Empty set (0.00 sec)
+
+mysql> DROP TABLE Details;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> DESC Details;
+ERROR 1146 (42S02): Table 'employee.details' doesn't exist
+mysql> CREATE TABLE Details(EMPID int(10), EMPNAME varchar(20), EMPZONE varchar(7), EMPAGE int(2));
+Query OK, 0 rows affected, 2 warnings (0.03 sec)
+
+mysql> DROP INDEX EMPAGE;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> DROP EMPAGE;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'EMPAGE' at line 1
+mysql> DROP 'EMPAGE';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''EMPAGE'' at line 1
+mysql> ALTER TABLE Details ADD EMPDOB varchar
+    ->
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> ALTER TABLE Details ADD EMPDOB varchar(12);
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> TRUNCATE Details;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> RENAME Details TO EMPDATA;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Details TO EMPDATA' at line 1
+mysql> RENAME TABLE Details TO EMPDATA;
+Query OK, 0 rows affected (0.03 sec)

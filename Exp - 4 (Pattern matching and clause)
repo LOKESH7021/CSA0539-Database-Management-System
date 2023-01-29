@@ -1,0 +1,166 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| employee           |
+| information_schema |
+| mysql              |
+| performance_schema |
+| school             |
+| sys                |
++--------------------+
+6 rows in set (0.01 sec)
+
+mysql> use school;
+Database changed
+mysql> show tables;
++------------------+
+| Tables_in_school |
++------------------+
+| orders           |
+| students         |
++------------------+
+2 rows in set (0.02 sec)
+
+mysql> desc students;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| S_Id      | int          | NO   | PRI | NULL    |       |
+| LastName  | varchar(255) | NO   |     | NULL    |       |
+| FirstName | varchar(255) | YES  |     | NULL    |       |
+| Address   | varchar(255) | YES  |     | NULL    |       |
+| City      | varchar(255) | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+5 rows in set (0.02 sec)
+
+mysql> insert into students(333, Kumar, Lokesh, Stuartpet, Arakkonam);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '333, Kumar, Lokesh, Stuartpet, Arakkonam)' at line 1
+mysql>  insert into students(333, 'Kumar', 'Lokesh', 'Stuartpet', 'Arakkonam');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '333, 'Kumar', 'Lokesh', 'Stuartpet', 'Arakkonam')' at line 1
+mysql>  INSERT INTO students(333, 'Kumar', 'Lokesh', 'Stuartpet', 'Arakkonam');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '333, 'Kumar', 'Lokesh', 'Stuartpet', 'Arakkonam')' at line 1
+mysql> INSERT INTO students(S_Id, LastName, FirstName, Address, City) VALUES(333, 'Kumar', 'Lokesh', Stuartpet, Arakkonam);
+ERROR 1054 (42S22): Unknown column 'Stuartpet' in 'field list'
+mysql> INSERT INTO students(S_Id, LastName, FirstName, Address, City) VALUES(333, 'Kumar', 'Lokesh', 'Stuartpet', 'Arakkonam');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO students(S_Id, LastName, FirstName, Address, City) VALUES(333, 'Kumar', 'Lokesh', 'Stuartpet', 'Arakkonam');
+ERROR 1062 (23000): Duplicate entry '333' for key 'students.PRIMARY'
+mysql> Query OK, 1 row affected (0.03 sec)
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Query OK, 1 row affected (0.03 sec)' at line 1
+mysql> SELECT * FROM students;
++------+----------+-----------+-----------+-----------+
+| S_Id | LastName | FirstName | Address   | City      |
++------+----------+-----------+-----------+-----------+
+|  333 | Kumar    | Lokesh    | Stuartpet | Arakkonam |
++------+----------+-----------+-----------+-----------+
+1 row in set (0.01 sec)
+
+mysql> INSERT INTO students(S_Id, LastName, FirstName, Address, City) VALUES(008, 'Shinoya', 'Hanshika', 'OHIO', 'Maldives');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM students;
++------+----------+-----------+-----------+-----------+
+| S_Id | LastName | FirstName | Address   | City      |
++------+----------+-----------+-----------+-----------+
+|    8 | Shinoya  | Hanshika  | OHIO      | Maldives  |
+|  333 | Kumar    | Lokesh    | Stuartpet | Arakkonam |
++------+----------+-----------+-----------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT City FROM students;
++-----------+
+| City      |
++-----------+
+| Maldives  |
+| Arakkonam |
++-----------+
+2 rows in set (0.00 sec)
+
+mysql> UPDATE students SET City = Agra WHERE S_Id = 333;
+ERROR 1054 (42S22): Unknown column 'Agra' in 'field list'
+mysql>  UPDATE students SET City = 'Agra' WHERE S_Id = 333;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from students;
++------+----------+-----------+-----------+----------+
+| S_Id | LastName | FirstName | Address   | City     |
++------+----------+-----------+-----------+----------+
+|    8 | Shinoya  | Hanshika  | OHIO      | Maldives |
+|  333 | Kumar    | Lokesh    | Stuartpet | Agra     |
++------+----------+-----------+-----------+----------+
+2 rows in set (0.00 sec)
+
+mysql> DELETE FROM students WHERE S_Id = 333;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT 8 FROM students;
++---+
+| 8 |
++---+
+| 8 |
++---+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM students;
++------+----------+-----------+---------+----------+
+| S_Id | LastName | FirstName | Address | City     |
++------+----------+-----------+---------+----------+
+|    8 | Shinoya  | Hanshika  | OHIO    | Maldives |
++------+----------+-----------+---------+----------+
+1 row in set (0.00 sec)
+
+mysql>  INSERT INTO students(S_Id, LastName, FirstName, Address, City) VALUES(333, 'Kumar', 'Lokesh', 'Stuartpet', 'Arakkonam');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO students(S_Id, LastName, FirstName, Address, City) VALUES(333, 'Kumar', 'Sanjay','Anna_Nagar', 'chennai');
+ERROR 1062 (23000): Duplicate entry '333' for key 'students.PRIMARY'
+mysql> INSERT INTO students(S_Id, LastName, FirstName, Address, City) VALUES(222, 'Kumar', 'Sanjay','Anna_Nagar', 'chennai');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO students(S_Id, LastName, FirstName, Address, City) VALUES(567, 'Khan', 'Sharukh','Kalagila', 'Kolkata');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM students;
++------+----------+-----------+------------+-----------+
+| S_Id | LastName | FirstName | Address    | City      |
++------+----------+-----------+------------+-----------+
+|    8 | Shinoya  | Hanshika  | OHIO       | Maldives  |
+|  222 | Kumar    | Sanjay    | Anna_Nagar | chennai   |
+|  333 | Kumar    | Lokesh    | Stuartpet  | Arakkonam |
+|  567 | Khan     | Sharukh   | Kalagila   | Kolkata   |
++------+----------+-----------+------------+-----------+
+4 rows in set (0.01 sec)
+
+mysql> SELECT * FROM students WHERE LastName LIKE 'K%';
++------+----------+-----------+------------+-----------+
+| S_Id | LastName | FirstName | Address    | City      |
++------+----------+-----------+------------+-----------+
+|  222 | Kumar    | Sanjay    | Anna_Nagar | chennai   |
+|  333 | Kumar    | Lokesh    | Stuartpet  | Arakkonam |
+|  567 | Khan     | Sharukh   | Kalagila   | Kolkata   |
++------+----------+-----------+------------+-----------+
+3 rows in set (0.02 sec)
+
+mysql> SELECT * FROM students WHERE LastName = "Kumar" AND Location = "chennai";
+ERROR 1054 (42S22): Unknown column 'Location' in 'where clause'
+mysql> SELECT * FROM students WHERE LastName = "Kumar" AND City = "chennai";
++------+----------+-----------+------------+---------+
+| S_Id | LastName | FirstName | Address    | City    |
++------+----------+-----------+------------+---------+
+|  222 | Kumar    | Sanjay    | Anna_Nagar | chennai |
++------+----------+-----------+------------+---------+
+1 row in set (0.01 sec)
+
+mysql> SELECT * FROM students WHERE LastName = "Kumar" OR City = "Maldives";
++------+----------+-----------+------------+-----------+
+| S_Id | LastName | FirstName | Address    | City      |
++------+----------+-----------+------------+-----------+
+|    8 | Shinoya  | Hanshika  | OHIO       | Maldives  |
+|  222 | Kumar    | Sanjay    | Anna_Nagar | chennai   |
+|  333 | Kumar    | Lokesh    | Stuartpet  | Arakkonam |
++------+----------+-----------+------------+-----------+
+3 rows in set (0.00 sec)
